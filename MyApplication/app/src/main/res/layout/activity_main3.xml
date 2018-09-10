@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main3Activity">
+
+    <RadioGroup
+        android:id="@+id/Vehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/Car"
+            android:layout_width="100sp"
+            android:layout_height="50sp"
+            android:text="Car" />
+
+        <RadioButton
+            android:id="@+id/Bike"
+            android:layout_width="100sp"
+            android:layout_height="50sp"
+            android:text="Bike" />
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SuwatApp</string>
+    <string name="password">Password</string>
+    <string name="button">Login</string>
+    <string name="Email">Email</string>
+    <string name="Google">Google SignIn</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>
