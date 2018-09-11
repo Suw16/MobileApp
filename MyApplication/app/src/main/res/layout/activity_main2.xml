@@ -19,7 +19,7 @@
         android:id="@+id/Fname"
         android:layout_width="200sp"
         android:layout_height="50sp"
-        android:hint="Fname"
+        android:hint="First Name"
         android:singleLine="true"
         android:maxLines="1"
         android:layout_below="@+id/Email"
@@ -28,7 +28,9 @@
         android:id="@+id/Lname"
         android:layout_width="200sp"
         android:layout_height="50sp"
-        android:hint="Lname"
+        android:hint="Last Name"
+        android:singleLine="true"
+        android:maxLines="1"
         android:layout_below="@+id/Fname"
         />
 
@@ -55,6 +57,7 @@
         android:hint="Password"
         android:singleLine="true"
         android:maxLines="1"
+        android:inputType="textPassword"
         android:layout_below="@+id/Phone"/>
     <Button
         android:id="@+id/Submit"

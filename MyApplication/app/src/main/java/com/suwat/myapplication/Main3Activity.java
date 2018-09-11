@@ -22,10 +22,6 @@ import java.lang.ref.Reference;
 public class Main3Activity extends AppCompatActivity {
     EditText getCarBrand,getCarID;
     Button CarBtn;
-    FirebaseDatabase Database;
-    DatabaseReference ref;
-    Car AddCar = new Car();
-    Data AddUser = new Data();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,27 +30,6 @@ public class Main3Activity extends AppCompatActivity {
         getCarBrand = (EditText)findViewById(R.id.carBrand);
         getCarID    = (EditText)findViewById(R.id.CarID);
         CarBtn      = (Button)findViewById(R.id.CarSubmit);
-
-        Database    = FirebaseDatabase.getInstance();
-        ref         = Database.getReference().child("Car");
-
-        CarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddValue();
-            }
-        });
-    }
-    public void AddValue(){
-        AddCar.setCarBrand(getCarBrand.getText().toString());
-        AddCar.setCarID(getCarID.getText().toString());
-
-        ref.child(AddCar.getCarBrand()).setValue(AddCar.CarID).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(Main3Activity.this,"Success. ",Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     //-------

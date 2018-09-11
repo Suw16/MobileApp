@@ -70,6 +70,8 @@ public class Main2Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(Main2Activity.this,"Register Success. ",Toast.LENGTH_LONG).show();
+                        Intent backtoIndex = new Intent(Main2Activity.this,MainActivity.class);
+                        startActivity(backtoIndex);
                     }
                 });
             }

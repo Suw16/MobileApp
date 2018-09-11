@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     SignInButton GoogleSignBtn;
     private static final int RC_SIGN_IN = 1;
-    DatabaseReference ref;
 
 
     @Override
@@ -69,19 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 login(getEmail,getPassword );
             }
         });
-      /* buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String getEmail = email.getText().toString().trim();
-                String getPassword = password.getText().toString().trim();
-                if (getEmail.isEmpty()){
-                    Toast.makeText(MainActivity.this,"Please Enter Email",Toast.LENGTH_SHORT).show();
-                }if (getPassword.isEmpty()){
-                    Toast.makeText(MainActivity.this, "Please Enter Password ",Toast.LENGTH_SHORT).show();
-                }else
-                signUp(getEmail,getPassword);
-            }
-        });*/
         GoogleSignBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,53 +90,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    /*
-    private void login(){
-        String getPhone = Email.getText().toString();
-        final String getPassword = password.getText().toString();
-        ref = FirebaseDatabase.getInstance().getReference().child("User");
-
-        try {
-            ref.child(getPhone).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Data newData = dataSnapshot.getValue(Data.class);
-                    if (getPassword.equals(newData.Password)){
-                        Toast.makeText(MainActivity.this, "Login Success ",Toast.LENGTH_SHORT).show();
-                        Intent toMain = new Intent(MainActivity.this,Main3Activity.class);
-                        startActivity(toMain);
-                    }else {
-                        Toast.makeText(MainActivity.this, "Password Doesn't match ",Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }catch (Exception e){
-            Toast.makeText(MainActivity.this, "Can't Login ",Toast.LENGTH_SHORT).show();
-        }
-
-    }*/
-
-   /* private void signUp(String getEmail, String getPassword){
-        mAuth.createUserWithEmailAndPassword(getEmail, getPassword)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Register Success. ",Toast.LENGTH_SHORT).show();
-                            Intent next = new Intent(MainActivity.this, Main2Activity.class);
-                            startActivity(next);
-                        } else {
-                            Toast.makeText(MainActivity.this, "Can't use " + email, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }*/
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
