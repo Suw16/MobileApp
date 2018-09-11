@@ -19,11 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Main2Activity extends AppCompatActivity {
 
-    EditText getFname,getLname,getPhone,getIden,getPssword,getNEmail,getNPassword;
-    Button Submit,newSubmit;
+    EditText getFname,getLname,getPhone,getIden,getPassword,getEmail;
+    Button Submit;
     FirebaseDatabase database;
     DatabaseReference myRef;
-    Data newData = new Data();
+    User addUser = new User();
     FirebaseAuth mAuth;
 
     @Override
@@ -31,76 +31,49 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-//--------------------------------------------------Old SignUP------------
+//--------------------------------------------------- Attribute ---------
+        getEmail = (EditText)findViewById(R.id.Email);
         getFname = (EditText)findViewById(R.id.Fname);
         getLname = (EditText)findViewById(R.id.Lname);
         getIden = (EditText)findViewById(R.id.Iden);
         getPhone  = (EditText)findViewById(R.id.Phone);
-        getPssword = (EditText)findViewById(R.id.Password);
+        getPassword = (EditText)findViewById(R.id.Password);
         Submit = (Button)findViewById(R.id.Submit);
-        database = FirebaseDatabase.getInstance();
-//---------------------------------------------------New SignUp----------
-        getNEmail = (EditText)findViewById(R.id.newEmail);
-        getNPassword = (EditText)findViewById(R.id.newPassword);
-        newSubmit = (Button)findViewById(R.id.newSubmit);
 
-        myRef = database.getReference().child("User");
+//-------------------------------------------------- FireBase -----------
+        database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        myRef = database.getReference().child("User").child(mAuth.getCurrentUser().getUid());
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getValue();
-            }
-        });
-        newSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String newEmail = getNEmail.getText().toString().trim();
-                String newPassword = getNPassword.getText().toString().trim();
-                signupwithPhone(newEmail,newPassword);
+                String EmailRegis = getEmail.getText().toString().trim();
+                String PasswordRegis = getPassword.getText().toString().trim();
+                Register(EmailRegis,PasswordRegis);
             }
         });
 
     }
-    public void getValue(){
-        newData.setFirstName(getFname.getText().toString());
-        newData.setLastName(getLname.getText().toString());
-        newData.setIdentify(getIden.getText().toString());
-        newData.setPhoneNumber(getPhone.getText().toString());
-        newData.setPassword(getPssword.getText().toString());
+    public void Register(String EmailRegis,String PasswordRegis){
+        addUser.setEmail(getEmail.getText().toString());
+        addUser.setFname(getFname.getText().toString());
+        addUser.setLname(getLname.getText().toString());
+        addUser.setID(getIden.getText().toString());
+        addUser.setPhone(getPhone.getText().toString());
+        addUser.setPassword(getPassword.getText().toString());
 
-        myRef.child(newData.getFirstName()).setValue(newData).addOnCompleteListener(this, new OnCompleteListener<Void>() {
+        mAuth.createUserWithEmailAndPassword(EmailRegis,PasswordRegis).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Intent Done = new Intent(Main2Activity.this,MainActivity.class);
-                    startActivity(Done);
-                    Toast.makeText(Main2Activity.this, "Register Succcess ",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(Main2Activity.this,"Can't Register ",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-    private void signupwithPhone(String newEmail, String newPassword){
-        mAuth.createUserWithEmailAndPassword(newEmail, newPassword)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                myRef.child(addUser.getFname()).setValue(addUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(Main2Activity.this, "Authentication Success.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(Main2Activity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(Main2Activity.this,"Register Success. ",Toast.LENGTH_LONG).show();
                     }
                 });
-
+            }
+        });
     }
-
     //--------------------------------------------------------------
 }

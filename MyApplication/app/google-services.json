@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "179524932262-btd6pejgqjhgangt82kqem5fpb8iqt3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.suwat.myapplication",
+            "certificate_hash": "ea165619d2cb69ebb1d5ebea227c5a47b87ccde8"
+          }
+        },
+        {
           "client_id": "179524932262-5a5dteuqv8mb9k7ps6slu2qn037ida15.apps.googleusercontent.com",
           "client_type": 3
         }
