@@ -53,4 +53,26 @@
         android:text="Submit"
         android:layout_below="@id/Password"
         />
+    <EditText
+        android:id="@+id/newEmail"
+        android:layout_width="200sp"
+        android:layout_height="50sp"
+        android:hint="NewEmail"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:layout_below="@+id/Submit"/>
+    <EditText
+        android:id="@+id/newPassword"
+        android:layout_width="200sp"
+        android:layout_height="50sp"
+        android:hint="newPassword"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:layout_below="@id/newEmail"/>
+    <Button
+        android:id="@+id/newSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="newSubmit"
+        android:layout_below="@+id/newPassword"/>
 </RelativeLayout>

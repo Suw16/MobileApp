@@ -33,8 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-    Button buttonRegister,googleLogout,SignUP,logIn;
-    EditText Phone,password;
+    Button googleLogout,SignUP,logIn;
+    EditText Email,password;
     GoogleSignInClient mGoogleSignInClient;
     SignInButton GoogleSignBtn;
     private static final int RC_SIGN_IN = 1;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Phone = (EditText)findViewById(R.id.Phone);
+        Email = (EditText)findViewById(R.id.Email);
         password = (EditText)findViewById(R.id.password);
         logIn = (Button)findViewById(R.id.LogIn);
         GoogleSignBtn  = (SignInButton)findViewById(R.id.googleSigin);
@@ -64,10 +64,12 @@ public class MainActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                String getEmail = Email.getText().toString().trim();
+                String getPassword = password.getText().toString().trim();
+                login(getEmail,getPassword );
             }
         });
-      /*  buttonRegister.setOnClickListener(new View.OnClickListener() {
+      /* buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String getEmail = email.getText().toString().trim();
@@ -102,8 +104,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    /*
     private void login(){
-        String getPhone = Phone.getText().toString();
+        String getPhone = Email.getText().toString();
         final String getPassword = password.getText().toString();
         ref = FirebaseDatabase.getInstance().getReference().child("User");
 
@@ -131,10 +134,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Can't Login ",Toast.LENGTH_SHORT).show();
         }
 
-    }
-
-
-
+    }*/
 
    /* private void signUp(String getEmail, String getPassword){
         mAuth.createUserWithEmailAndPassword(getEmail, getPassword)
@@ -189,6 +189,30 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void login(String getEmail,String getPassword ){
+        mAuth.signInWithEmailAndPassword(getEmail, getPassword)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(MainActivity.this, "Authentication success.",
+                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            Intent Main = new Intent(MainActivity.this,Main3Activity.class);
+                            startActivity(Main);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+
+    }
+
 
     private void updateUI(FirebaseUser user) {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
