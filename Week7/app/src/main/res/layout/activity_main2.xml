@@ -41,6 +41,7 @@
         android:singleLine="true"
         android:maxLines="1"
         android:hint="Identification Number"
+        android:inputType="number"
         android:layout_below="@+id/Lname"/>
     <EditText
         android:id="@+id/Phone"
@@ -48,6 +49,7 @@
         android:layout_height="50sp"
         android:hint="Phone Number"
         android:singleLine="true"
+        android:inputType="number"
         android:maxLines="1"
         android:layout_below="@+id/Iden" />
     <EditText
