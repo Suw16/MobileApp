@@ -14,7 +14,7 @@
         />
     <EditText
         android:id="@+id/header"
-        android:layout_width="200sp"
+        android:layout_width="wrap_content"
         android:layout_height="50sp"
         android:layout_below="@+id/userName"
         android:layout_marginTop="10px"
