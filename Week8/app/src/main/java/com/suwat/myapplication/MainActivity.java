@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     SignInButton GoogleSignBtn;
     private static final int RC_SIGN_IN = 1;
+    FirebaseAuth.AuthStateListener Authlisten;
 
 
     @Override
@@ -89,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(signupPage);
             }
         });
+
+        Authlisten = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null){
+                    startActivity(new Intent(MainActivity.this,Main3Activity.class));
+                }
+            }
+        };
     }
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -179,5 +189,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }*/
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(Authlisten);
+    }
 }
 

@@ -1,6 +1,7 @@
 package com.suwat.myapplication;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,14 +50,6 @@ public class Main3Activity extends AppCompatActivity {
         if (getuser != null) {
             UserInfo();
         }
-        Authlisten = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() != null){
-
-                }
-            }
-        };
 
         submitPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,14 +76,6 @@ public class Main3Activity extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mAuth.addAuthStateListener(Authlisten);
-
     }
 
     private void postNow(){

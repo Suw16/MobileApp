@@ -1,0 +1,13 @@
+package com.suwat.myapplication;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class SeePost extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_see_post);
+    }
+}
